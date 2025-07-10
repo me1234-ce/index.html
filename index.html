@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Deal Finder</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f2f2f2; }
+    h2 { margin-bottom: 10px; }
+    input[type="text"] { width: 80%; padding: 10px; margin-bottom: 10px; }
+    button { padding: 10px; }
+    .results { margin-top: 20px; }
+    .item { background: #fff; padding: 10px; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .item img { max-width: 100px; }
+    .item a { display: inline-block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Search Local Deals</h2>
+  <input type="text" id="searchInput" placeholder="Enter product name..." />
+  <input type="text" id="zipInput" placeholder="ZIP Code" />
+  <button onclick="search()">Search</button>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    async function search() {
+      const query = document.getElementById('searchInput').value;
+      const zip = document.getElementById('zipInput').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = 'Searching...';
+
+      const searchUrl = `https://www.ebay.com/sch/i.html?_nkw=${encodeURIComponent(query)}&_stpos=${zip}&_fspt=1`;
+
+      resultsDiv.innerHTML = `
+        <p>Click below to view local results on eBay:</p>
+        <a href="${searchUrl}" target="_blank">${searchUrl}</a>
+      `;
+    }
+  </script>
+</body>
+</html>
